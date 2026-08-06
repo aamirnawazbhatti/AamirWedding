@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Heart, Music, VolumeX, Sparkles, LogOut } from "lucide-react";
+import { Heart, Music, VolumeX, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface LayoutProps {
@@ -13,7 +13,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const isAuthPage = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/register';
 
   const [user, setUser] = useState<any>(null);
-  const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const [isPlayingMusic, setIsPlayingMusic] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const synthTimerRef = useRef<any>(null);
@@ -41,8 +41,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       if (audioCtxRef.current) {
         audioCtxRef.current.close();
       }
+
+
     };
   }, []);
+  useEffect(() => {
+    toggleMusic()
+    // startWebAudioSynth()
+  }, [])
 
   const startWebAudioSynth = () => {
     try {
@@ -176,8 +182,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           {/* Couple Monogram Logo */}
-          <div 
-            onClick={() => navigate('/home')}
+          <div
+            onClick={() => {
+              if (user) { navigate('/home') }
+
+            }}
             style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}
           >
             <div
@@ -202,9 +211,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <span className="font-script" style={{ fontSize: "1.6rem", color: "#4a1525", fontWeight: "bold", lineHeight: 1 }}>
                 Aamir & Yousra
               </span>
-              <span style={{ display: "block", fontSize: "0.65rem", letterSpacing: "2px", color: "#c89d54", textTransform: "uppercase" }}>
-                October 3 & 4, 2026 • Islamabad
-              </span>
+              {user &&
+                <span style={{ display: "block", fontSize: "0.65rem", letterSpacing: "2px", color: "#c89d54", textTransform: "uppercase" }}>
+                  October 3 & 4, 2026 • Islamabad
+                </span>}
             </div>
           </div>
 
@@ -279,14 +289,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <span className="d-none d-sm-inline">Exit</span>
                 </button>
               </div>
-            ) : isAuthPage ? (
-              <button
-                onClick={() => navigate('/home')}
-                className="btn-gold"
-                style={{ padding: "6px 16px", fontSize: "0.85rem" }}
-              >
-                <Sparkles size={14} /> Preview Site
-              </button>
             ) : (
               <button
                 onClick={() => navigate('/')}
@@ -329,22 +331,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </p>
           </div>
 
-          <div 
-            style={{ 
-              display: "flex", 
-              justifyContent: "center", 
-              gap: "20px", 
-              flexWrap: "wrap", 
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "20px",
+              flexWrap: "wrap",
               marginBottom: "2rem",
               fontSize: "0.9rem",
               color: "#d4af37"
             }}
           >
-            <span>📅 Barat: Oct 3, 2026</span>
-            <span>•</span>
-            <span>📅 Walima: Oct 4, 2026</span>
-            <span>•</span>
-            <span>📍 Islamabad, Pakistan</span>
+            {user && <>
+              <span>📅 Barat: Oct 3, 2026</span>
+              <span>•</span>
+              <span>📅 Walima: Oct 4, 2026</span>
+              <span>•</span>
+              <span>📍 Islamabad, Pakistan</span>
+            </>}
           </div>
 
           <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.1)", paddingTop: "1.5rem", fontSize: "0.8rem", color: "#7d6b73" }}>

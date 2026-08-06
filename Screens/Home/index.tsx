@@ -5,7 +5,10 @@ import {
   Gift, Camera, Utensils, X
 } from "lucide-react";
 import Layout from "../../sharecomponents/Layout";
-
+import pic1 from "../Assets/AAS02538.JPG"
+import pic2 from "../Assets/AAS01894.JPG"
+import pic33 from "../Assets/AAS02219.JPG"
+import pic3 from "../Assets/AAS02522.JPG"
 function Home() {
   // Target Wedding Date: Barat Oct 3, 2026 18:00:00
   const weddingDate = new Date("2026-10-03T18:00:00").getTime();
@@ -35,44 +38,49 @@ function Home() {
   }, []);
 
   const galleryImages = [
+    // {
+    //   url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+    //   caption: "Aamir & Yousra - Bat Pakki"
+    // },
     {
-      url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
-      caption: "Aamir & Yousra - Engagement"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80",
+      url: pic1,
       caption: "Pre-Wedding Moments"
     },
     {
-      url: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80",
-      caption: "The Ring Ceremony"
+      url: pic2,
+      caption: "Pre-Wedding Moments"
     },
     {
-      url: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80",
-      caption: "Family Celebrations in Islamabad"
-    }
+      url: pic3,
+      caption: "Pre-Wedding Moments"
+    },
+    {
+      url: pic33,
+      caption: "The Ring Ceremony"
+    },
+
   ];
 
   const storyTimeline = [
     {
-      year: "2023",
-      title: "First Encounter",
-      desc: "Destiny brought Aamir & Yousra together, sparking a deep connection built on trust, respect, and shared dreams."
+      year: "28 Jan 2025",
+      title: "First Meeting of Our Families",
+      desc: "Our families met for the first time, marking the beginning of a beautiful journey filled with love, trust, and countless blessings."
     },
     {
-      year: "2024",
-      title: "Families Meet & Baat Pakki",
-      desc: "Our beloved families came together with blessings and joy to seal our future journey."
+      year: "8 Feb 2025",
+      title: "Baat Pakki & Dua-e-Khair",
+      desc: "With the prayers and blessings of our loved ones, our families officially celebrated the beginning of our lifelong commitment."
     },
     {
-      year: "2025",
-      title: "The Engagement",
-      desc: "Exchanged rings surrounded by warm smiles, love, and prayers from family and friends."
+      year: "23 Mar 2026",
+      title: "Nikkah Ceremony",
+      desc: "On this blessed day, we were united in the sacred bond of Nikah, surrounded by the love, prayers, and happiness of our family."
     },
     {
-      year: "2026",
-      title: "Barat & Walima Celebrations",
-      desc: "Tying the sacred knot of marriage on Oct 3 & 4 in Islamabad, embarking on our lifelong journey together."
+      year: "3–4 Oct 2026",
+      title: "Barat & Walima",
+      desc: "With the blessings of Allah and our families, we look forward to celebrating our Barat and Walima in Islamabad as we begin our new journey together. Join us as we celebrate our Barat and Walima. Your presence and blessings will make our special days even more memorable."
     }
   ];
 
@@ -176,7 +184,7 @@ function Home() {
               <Clock size={18} /> Venue & Event Details
             </a>
             <a href="#story" className="btn-outline-gold" style={{ padding: "14px 32px", fontSize: "1.05rem" }}>
-              <Heart size={18} /> Our Love Story
+              <Heart size={18} /> Our Story
             </a>
           </motion.div>
         </section>
@@ -326,6 +334,12 @@ function Home() {
                   Join us as the Barat arrives for the grand wedding celebration and dinner banquet.
                 </p>
                 <div style={{ borderTop: "1px solid rgba(212, 175, 55, 0.2)", paddingTop: "1.25rem", marginTop: "1.25rem", fontSize: "0.9rem", color: "#4a1525" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "1rem" }}>
+                    <Clock size={18} color="#c89d54" />
+                    {/* <span>Dinner served at 7:00 PM</span> */}
+
+                    <span>Sehra Bandi Ceremony & Barat Departure – 7:00 PM</span>
+                  </div>
                   <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "10px" }}>
                     <MapPin size={20} color="#c89d54" style={{ flexShrink: 0, marginTop: "2px" }} />
                     <div>
@@ -335,10 +349,7 @@ function Home() {
                       </span>
                     </div>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "1rem" }}>
-                    <Clock size={18} color="#c89d54" />
-                    <span>Dinner served at 7:00 PM</span>
-                  </div>
+
                   <a
                     href="https://maps.google.com/?q=Majesty+Marquee+Kurri+Road+Islamabad"
                     target="_blank"
@@ -368,6 +379,10 @@ function Home() {
                   Celebrate the auspicious occasion of Walima reception with family, friends & loved ones.
                 </p>
                 <div style={{ borderTop: "1px solid rgba(212, 175, 55, 0.2)", paddingTop: "1.25rem", marginTop: "1.25rem", fontSize: "0.9rem", color: "#4a1525" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "1rem" }}>
+                    <Clock size={18} color="#c89d54" />
+                    <span>Reception Dinner at 2:00 PM</span>
+                  </div>
                   <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "10px" }}>
                     <MapPin size={20} color="#c89d54" style={{ flexShrink: 0, marginTop: "2px" }} />
                     <div>
@@ -377,10 +392,7 @@ function Home() {
                       </span>
                     </div>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "1rem" }}>
-                    <Clock size={18} color="#c89d54" />
-                    <span>Reception Dinner at 2:00 PM</span>
-                  </div>
+
                   <a
                     href="https://maps.google.com/?q=Reet+Marquee+Khanna+Service+Road+Islamabad"
                     target="_blank"

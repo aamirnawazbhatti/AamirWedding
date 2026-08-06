@@ -12,6 +12,20 @@ function Login() {
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
 
+  const userList = [{
+    id: 0,
+    name: "Aamir ",
+    lastName: "Nawaz"
+
+  },
+  {
+    id: 1,
+    name: "Yousra ",
+    lastName: "yusra"
+
+  }
+  ]
+
   // Prevent browser back button loop
   useEffect(() => {
     window.history.pushState(null, "", window.location.href);
@@ -29,41 +43,46 @@ function Login() {
 
     setTimeout(() => {
       const codeUpper = guestCode.trim().toUpperCase();
-      let guestName = "Honored Guest";
-      let tableNo = "Table 1 - Grand Ballroom";
+      const inputClean = guestCode.trim().toLowerCase();
+      const matchedUser = userList.find(item => {
+        const firstName = item.name.trim().toLowerCase();
+        const lastName = item.lastName.trim().toLowerCase();
+        const fullName = `${firstName} ${lastName}`;
+        return firstName === inputClean || lastName === inputClean || fullName === inputClean;
+      });
+      console.log("Matched User:", matchedUser);
 
-      if (codeUpper === "786AY2026" || codeUpper === "786AY2026") {
-        guestName = "VIP Family Member";
-      } else if (codeUpper.startsWith("GUEST")) {
-        guestName = "Special Guest";
+      if (matchedUser) {
+        console.log("Login Successful");
+        const userData = {
+          guest_name: `${matchedUser.name.trim()} ${matchedUser.lastName.trim()}`,
+          guest_code: codeUpper,
+          role: "Invited Guest",
+          login_time: new Date().toISOString()
+        };
+
+        localStorage.setItem("user", JSON.stringify(userData));
+        setSuccessMsg("Welcome! Opening your personal wedding invitation...");
+
+        setTimeout(() => {
+          setLoading(false);
+          navigate("/home");
+        }, 1200);
       } else {
-        guestName = guestCode.trim();
+        console.log("Invalid Name or Last Name");
+        setError("Invalid Name or Last Name")
       }
 
-      const userData = {
-        guest_name: guestName,
-        guest_code: codeUpper,
-        table_no: tableNo,
-        role: "Invited Guest",
-        login_time: new Date().toISOString()
-      };
 
-      localStorage.setItem("user", JSON.stringify(userData));
-      setSuccessMsg("Welcome! Opening your personal wedding invitation...");
-
-      setTimeout(() => {
-        setLoading(false);
-        navigate("/home");
-      }, 1200);
     }, 800);
   };
 
 
 
-  const usePresetCode = (code: string) => {
-    setGuestCode(code);
-    setIsEnvelopeOpen(true);
-  };
+  // const usePresetCode = (code: string) => {
+  //   setGuestCode(code);
+  //   setIsEnvelopeOpen(true);
+  // };
 
   return (
     <Layout>
@@ -165,18 +184,18 @@ function Login() {
               </motion.button>
 
               <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center", gap: "10px", flexWrap: "wrap" }}>
-                <button
+                {/* <button
                   onClick={() => usePresetCode("")}
                   style={chipStyle}
                 >
                   ✨ VIP Pass Code
-                </button>
-                <button
-                  onClick={() => usePresetCode("786ay2026")}
+                </button> */}
+                {/* <button
+                  onClick={() => usePresetCode("")}
                   style={chipStyle}
                 >
                   💍 VIP Family Pass
-                </button>
+                </button> */}
               </div>
             </motion.div>
           ) : (
@@ -204,11 +223,11 @@ function Login() {
               {/* Form Content */}
               <form onSubmit={handleVIPCodeLogin} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                 <div>
-                  <label style={labelStyle}>Invitation Passcode </label>
+                  <label style={labelStyle}>Invitation Code or Name </label>
                   <div style={{ position: "relative" }}>
                     <input
                       className="input-field"
-                      placeholder="Enter Code"
+                      placeholder="Enter Name"
                       value={guestCode}
                       onChange={(e) => setGuestCode(e.target.value)}
                       style={{
@@ -307,17 +326,17 @@ const labelStyle: React.CSSProperties = {
   color: "#4a1525"
 };
 
-const chipStyle: React.CSSProperties = {
-  background: "rgba(212, 175, 55, 0.12)",
-  border: "1px solid rgba(212, 175, 55, 0.3)",
-  borderRadius: "20px",
-  padding: "6px 14px",
-  fontSize: "0.78rem",
-  color: "#4a1525",
-  fontWeight: 600,
-  cursor: "pointer",
-  transition: "all 0.2s ease"
-};
+// const chipStyle: React.CSSProperties = {
+//   background: "rgba(212, 175, 55, 0.12)",
+//   border: "1px solid rgba(212, 175, 55, 0.3)",
+//   borderRadius: "20px",
+//   padding: "6px 14px",
+//   fontSize: "0.78rem",
+//   color: "#4a1525",
+//   fontWeight: 600,
+//   cursor: "pointer",
+//   transition: "all 0.2s ease"
+// };
 
 const errorStyle: React.CSSProperties = {
   color: "#b81c34",
