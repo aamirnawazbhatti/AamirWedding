@@ -1,18 +1,25 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+// import { defineConfig } from 'vite'
+// import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
+// // https://vite.dev/config/
+// export default defineConfig({
+//   plugins: [react()],
+//   server: {
+//     proxy: {
+//       '/4DACTION': {
+//         target: 'http://71.24.35.46:8090',
+//         changeOrigin: true,
+//         secure: false,
+//       },
+//     },
+//     host: true,
+//     port: 5173
+//   },
+// })
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      '/4DACTION': {
-        target: 'http://71.24.35.46:8090',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-    host: true,
-    port: 5173
-  },
-})
+  base: "/AamirWedding/",
+});
